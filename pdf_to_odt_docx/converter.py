@@ -79,8 +79,8 @@ def main():
         outfolder = parsed_args.outfolder[0]
         print(outfolder)
         p = Path(infolder)
-        files = [x for x in p.iterdir() if x.is_file() and str(x).endswith('.pdf')]
-        print(y)
+        pdf_files = [x for x in p.iterdir() if x.is_file() and str(x).endswith('.pdf')]
+        print(pdf_files)
 
 
     #filePath = input("Insert path to pdf file:\n")
