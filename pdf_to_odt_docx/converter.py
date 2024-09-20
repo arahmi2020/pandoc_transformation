@@ -27,7 +27,7 @@ class FileTypes(Enum):
     ODT = 2
 
 
-def extractContent(inFilePath: PurePath) -> str:
+def extractContent(inFilePath: Path) -> str:
     """Extracts the content from the PDF file"""
     text = ""
     #with inFilePath.open() as f: f.readline()
@@ -40,14 +40,14 @@ def extractContent(inFilePath: PurePath) -> str:
     return text
 
 
-def createDOCX(content: str, outFilePath: PurePath) -> None:
+def createDOCX(content: str, outFilePath: Path) -> None:
     """Generates a DOCX file"""
     doc = Document()
     doc.add_paragraph(content)
     doc.save(str(outFilePath.absolute()))
 
 
-def createODT(content: str, outFilePath: PurePath) -> None:
+def createODT(content: str, outFilePath: Path) -> None:
     """Generates a ODT file"""
     paragraph = P(text = content)
     doc = OpenDocumentText()
@@ -55,7 +55,7 @@ def createODT(content: str, outFilePath: PurePath) -> None:
     doc.save(str(outFilePath.absolute()))
 
 
-def convert(content: str, outFilePath: PurePath, type: FileTypes) -> None:
+def convert(content: str, outFilePath: Path, type: FileTypes) -> None:
     """Converts the string to the defined type"""
     if type == FileTypes.DOCX:
         createDOCX(content, outFilePath)
@@ -63,7 +63,7 @@ def convert(content: str, outFilePath: PurePath, type: FileTypes) -> None:
         createODT(content, outFilePath)
 
 
-def convertfile(inFilePath: PurePath, outFilePath: PurePath, type: FileTypes) -> None:
+def convertfile(inFilePath: Path, outFilePath: Path, type: FileTypes) -> None:
     """Converts the file to the defined type"""
     content: str = extractContent(inFilePath)
     if type == FileTypes.DOCX:
