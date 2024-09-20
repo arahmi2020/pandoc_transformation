@@ -91,8 +91,9 @@ def main():
             filename = pf.name
             print(filename)
             outFile = pout / filename
-            convertfile(pf, outFile / ".odt", FileTypes.ODT)
-            convertfile(pf, outFile / ".docx", FileTypes.DOCX)
+            
+            convertfile(pf, outFile.with_name(outFile.name+".odt"), FileTypes.ODT)
+            convertfile(pf, outFile.with_name(outFile.name+".docx"), FileTypes.DOCX)
 
 
 if __name__ == "__main__":
