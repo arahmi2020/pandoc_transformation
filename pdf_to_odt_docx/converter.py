@@ -4,6 +4,8 @@ from docx import Document
 from odf.opendocument import OpenDocumentText
 from odf.text import P
 
+from pathlib import Path
+
 import argparse
 import os
 
@@ -70,6 +72,15 @@ def convertfile(filePath: str, customPath: str, type: FileTypes) -> None:
 def main():
     parsed_args = parse_arguments()
     print (parsed_args)
+
+    if args.in and args.out:
+        print(args.in)
+        print(args.out)
+        p = Path(args.in)
+        y = [x for x in p.iterdir() if x.is_file()]
+        print(y)
+
+
     #filePath = input("Insert path to pdf file:\n")
     #for 
     #convertfile(filePath, filePath + ".odt", FileTypes.ODT)
