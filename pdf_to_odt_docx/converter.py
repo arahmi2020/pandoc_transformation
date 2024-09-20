@@ -79,7 +79,7 @@ def main():
         outfolder = parsed_args.outfolder[0]
         print(outfolder)
         p = Path(infolder)
-        y = [x for x in p.iterdir() if x.is_file()]
+        files = [x for x in p.iterdir() if x.is_file() and str(x).endswith('.pdf')]
         print(y)
 
 
