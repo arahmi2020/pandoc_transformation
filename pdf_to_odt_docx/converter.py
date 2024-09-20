@@ -32,7 +32,8 @@ def extractContent(inFilePath: Path) -> str:
     text = ""
     #with inFilePath.open() as f: f.readline()
     #with open(filePath, "rb") as file:
-    with inFilePath.open() as file:
+    #with inFilePath.open() as file:
+    with open(str(inFilePath.absolute()), "rb") as file:
         reader = PdfReader(file)
         for pageNumber in range(len(reader.pages)):
             page = reader.pages[pageNumber]
