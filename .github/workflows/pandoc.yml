@@ -25,18 +25,26 @@ jobs:
           # python -m pip install . # install local script
       - name: transform pdf to docx / odt
         run: |
-          python3 ./pdf_to_odt_docx/converter.py -in ./input -out ./output > ./input/converted.txt
+          python3 ./pdf_to_odt_docx/converter.py -in ./input -out ./intermediate
+      - name: Archive intermediate folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: intermediate
+          path: |
+            ./intermediate/
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
       - name: run pandoc
         uses: docker://pandoc/core:2.9
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
             --output=./output/converted.txt.html
-            ./input/converted.txt
+            ./intermediate/converted.txt
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
+          name: output
           path: |
             ./output/
         # Use always() to always run this step to publish test results when there are test failures
