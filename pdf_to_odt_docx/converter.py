@@ -80,18 +80,19 @@ def main():
         print(infolder)
         outfolder = parsed_args.outfolder[0]
         print(outfolder)
-        p = Path(infolder)
-        pdf_files = [x for x in p.iterdir() if x.is_file() and str(x).endswith('.pdf')]
+        pin = Path(infolder)
+        pdf_files = [x for x in pin.iterdir() if x.is_file() and str(x).endswith('.pdf')]
         print(pdf_files)
 
+        pout = Path(outfolder)
+
         for pf in pdf_files:
+            filename = pf.name
+            print(filename)
+            outFile = pout / filename
+            convertfile(pf, outFile / ".odt", FileTypes.ODT)
+            convertfile(pf, outFile / ".docx", FileTypes.DOCX)
 
-
-
-    #filePath = input("Insert path to pdf file:\n")
-    #for 
-    #convertfile(filePath, filePath + ".odt", FileTypes.ODT)
-    #convertfile(filePath, filePath + ".docx", FileTypes.DOCX)
 
 if __name__ == "__main__":
     main()
