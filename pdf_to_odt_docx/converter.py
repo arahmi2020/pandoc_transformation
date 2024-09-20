@@ -74,8 +74,8 @@ def main():
     print (parsed_args)
 
     if parsed_args.infolder and parsed_args.outfolder:
-        print(arparsed_argsgs.infolder)
-        print(parsed_args.outfolderout)
+        print(parsed_args.infolder)
+        print(parsed_args.outfolder)
         p = Path(parsed_args.infolder)
         y = [x for x in p.iterdir() if x.is_file()]
         print(y)
