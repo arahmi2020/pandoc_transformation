@@ -73,10 +73,10 @@ def main():
     parsed_args = parse_arguments()
     print (parsed_args)
 
-    if args.in and args.out:
-        print(args.in)
+    if args('in') and args.out:
+        print(args('in'))
         print(args.out)
-        p = Path(args.in)
+        p = Path(args('in'))
         y = [x for x in p.iterdir() if x.is_file()]
         print(y)
 
