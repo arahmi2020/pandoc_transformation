@@ -27,10 +27,12 @@ class FileTypes(Enum):
     ODT = 2
 
 
-def extractContent(filePath: str) -> str:
+def extractContent(inFilePath: PurePath) -> str:
     """Extracts the content from the PDF file"""
     text = ""
-    with open(filePath, "rb") as file:
+    #with inFilePath.open() as f: f.readline()
+    #with open(filePath, "rb") as file:
+    with inFilePath.open() as file:
         reader = PdfReader(file)
         for pageNumber in range(len(reader.pages)):
             page = reader.pages[pageNumber]
@@ -38,36 +40,36 @@ def extractContent(filePath: str) -> str:
     return text
 
 
-def createDOCX(content: str, customPath: str) -> None:
+def createDOCX(content: str, outFilePath: PurePath) -> None:
     """Generates a DOCX file"""
     doc = Document()
     doc.add_paragraph(content)
-    doc.save(customPath)
+    doc.save(str(outFilePath.absolute()))
 
 
-def createODT(content: str, customPath: str) -> None:
+def createODT(content: str, outFilePath: PurePath) -> None:
     """Generates a ODT file"""
     paragraph = P(text = content)
     doc = OpenDocumentText()
     doc.text.addElement(paragraph)
-    doc.save(customPath)
+    doc.save(str(outFilePath.absolute()))
 
 
-def convert(content: str, customPath: str, type: FileTypes) -> None:
+def convert(content: str, outFilePath: PurePath, type: FileTypes) -> None:
     """Converts the string to the defined type"""
     if type == FileTypes.DOCX:
-        createDOCX(content, customPath)
+        createDOCX(content, outFilePath)
     else:
-        createODT(content, customPath)
+        createODT(content, outFilePath)
 
 
-def convertfile(filePath: str, customPath: str, type: FileTypes) -> None:
+def convertfile(inFilePath: PurePath, outFilePath: PurePath, type: FileTypes) -> None:
     """Converts the file to the defined type"""
-    content = extractContent(filePath)
+    content: str = extractContent(inFilePath)
     if type == FileTypes.DOCX:
-        createDOCX(content, customPath)
+        createDOCX(content, outFilePath)
     else:
-        createODT(content, customPath)
+        createODT(content, outFilePath)
 
 def main():
     parsed_args = parse_arguments()
@@ -81,6 +83,9 @@ def main():
         p = Path(infolder)
         pdf_files = [x for x in p.iterdir() if x.is_file() and str(x).endswith('.pdf')]
         print(pdf_files)
+
+        for pf in pdf_files:
+
 
 
     #filePath = input("Insert path to pdf file:\n")
