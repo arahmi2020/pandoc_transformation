@@ -11,8 +11,8 @@ import os
 
 def parse_arguments():
     parser = argparse.ArgumentParser("pdf_converter")
-    parser.add_argument("-in", help="Path to the input folder.", type=dir_path)
-    parser.add_argument("-out", help="Path to the output folder.", type=dir_path)
+    parser.add_argument("-in", help="Path to the input folder.", dest='infolder', nargs=1, required=True, type=dir_path)
+    parser.add_argument("-out", help="Path to the output folder.", dest='outfolder', nargs=1, required=True, type=dir_path)
 
     return parser.parse_args()
 
@@ -73,10 +73,10 @@ def main():
     parsed_args = parse_arguments()
     print (parsed_args)
 
-    if parsed_args.in and parsed_args.out:
-        print(arparsed_argsgs.in)
-        print(parsed_args.out)
-        p = Path(parsed_args.in)
+    if parsed_args.infolder and parsed_args.outfolder:
+        print(arparsed_argsgs.infolder)
+        print(parsed_args.outfolderout)
+        p = Path(parsed_args.infolder)
         y = [x for x in p.iterdir() if x.is_file()]
         print(y)
 
