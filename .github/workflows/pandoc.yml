@@ -41,7 +41,7 @@ jobs:
             --standalone
             --list-tables=true
             --columns=100
-            --extract-media ./output/media
+            --extract-media ./output
             --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run pandoc II
