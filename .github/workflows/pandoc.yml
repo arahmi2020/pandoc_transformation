@@ -39,6 +39,8 @@ jobs:
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
+            --list-tables=true
+            --columns=100
             --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run pandoc II
@@ -46,6 +48,8 @@ jobs:
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
+            --list-tables=true
+            --columns=100
             --output=./output/Automotive-SPICE-PAM-v40.pdf.docx.rst
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.docx
       - name: Archive output folder
