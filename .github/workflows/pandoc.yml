@@ -69,7 +69,7 @@ jobs:
         run: >
           sphinx-build
           -c ./sphinx-config
-          -b html . ./public
+          -b html ./output ./public
           -vv
           --jobs=auto
           --show-traceback
