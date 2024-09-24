@@ -34,22 +34,20 @@ jobs:
             ./intermediate/
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
-      - name: create file list
-        id: files_list
-        run: |
-          echo "files=$(printf '"%s" ' *.docx)" > $GITHUB_OUTPUT
-      - name: run pandoc
+      - name: run pandoc I
         uses: docker://pandoc/core:2.9
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
-            --output=./output/converted.txt.html
-            ./intermediate/converted.txt
-      - name: bulk pandoc transformation
+            --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
+            ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
+      - name: run pandoc II
         uses: docker://pandoc/core:2.9
-        with: |
-          cd ./intermediate
-          find . -name \*.docx -type f -exec pandoc -o {}.rst {} \;
+        with:
+          args: >- # allows you to break string into multiple lines
+            --standalone
+            --output=./output/Automotive-SPICE-PAM-v40.pdf.docx.rst
+            ./intermediate/Automotive-SPICE-PAM-v40.pdf.docx
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
