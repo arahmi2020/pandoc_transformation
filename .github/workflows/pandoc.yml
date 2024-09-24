@@ -79,3 +79,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
          path: ./public
+
+  # github pages deployment job
+  github_pages_deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: convert_via_pandoc
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
