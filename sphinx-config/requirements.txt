@@ -1,5 +1,6 @@
 sphinx>=4.0
 sphinx-needs>=3.0
+sphinxcontrib-plantuml
 matplotlib
 sphinx-immaterial
 sphinx-rtd-theme
