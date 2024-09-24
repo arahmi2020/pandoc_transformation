@@ -47,7 +47,7 @@ jobs:
             ./intermediate/converted.txt
       - name: bulk pandoc transformation
         uses: docker://pandoc/core:2.9
-        run: |
+        with: |
           cd ./intermediate
           find . -name \*.docx -type f -exec pandoc -o {}.rst {} \;
       - name: Archive output folder
