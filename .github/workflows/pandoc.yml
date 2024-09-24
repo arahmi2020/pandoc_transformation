@@ -22,6 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install setuptools
           python -m pip install -r ./pdf_to_odt_docx/requirements.txt
+          python -m pip install -r ./sphinx-config/requirements.txt
           # python -m pip install . # install local script
       - name: transform pdf to docx / odt
         run: |
@@ -61,3 +62,20 @@ jobs:
             ./output/
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
+      - name: Setup github pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Render the documentation with the transformed rst files
+        run: >
+          sphinx-build
+          -c ./sphinx-config
+          -b html . ./public
+          -vv
+          --jobs=auto
+          --show-traceback
+          --fail-on-warning
+          --keep-going
+      - name: Upload artifact to github pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+         path: ./public

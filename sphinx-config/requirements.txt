@@ -1,0 +1,12 @@
+sphinx>=4.0
+sphinxcontrib.jquery
+sphinxcontrib-plantuml
+sphinx-needs>=3.0
+matplotlib
+sphinx-copybutton
+sphinxcontrib-programoutput
+sphinx-design
+click
+tabulate
+sphinx-immaterial
+sphinx-rtd-theme
