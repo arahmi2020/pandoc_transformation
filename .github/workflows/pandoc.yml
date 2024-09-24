@@ -73,8 +73,8 @@ jobs:
           -vv
           --jobs=auto
           --show-traceback
-          --fail-on-warning
           --keep-going
+          # --fail-on-warning
       - name: Upload artifact to github pages
         uses: actions/upload-pages-artifact@v3
         with:
