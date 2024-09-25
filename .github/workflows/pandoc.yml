@@ -45,7 +45,7 @@ jobs:
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
       - name: run pandoc I
-        uses: docker://pandoc/core:3.2
+        uses: docker://pandoc/core:3.4
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
@@ -58,7 +58,7 @@ jobs:
         run: |
           sed -e "s/ *:header-rows: 1//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
       - name: run pandoc II
-        uses: docker://pandoc/core:3.2
+        uses: docker://pandoc/core:3.4
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
