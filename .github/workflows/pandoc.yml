@@ -56,7 +56,7 @@ jobs:
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: Replace values in rst files
         run: |
-          sed -e "s/:header-rows: 1//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
+          sed -e "s/^*:header-rows: 1//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
       - name: run pandoc II
         uses: docker://pandoc/core:3.2
         with:
