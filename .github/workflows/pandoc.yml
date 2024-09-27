@@ -58,7 +58,7 @@ jobs:
         run: |
           sed --version
           echo "James Bond" | sed -E 's/(.*) (.*)/The name is \2, \1 \2./'
-          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
+          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
           sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed2.rst
       - name: run pandoc II
         uses: docker://pandoc/core:3.4
