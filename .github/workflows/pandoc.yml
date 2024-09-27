@@ -58,7 +58,7 @@ jobs:
         run: |
           sed --version
           sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
-          sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed2.rst
+          sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst
       - name: run pandoc II
         uses: docker://pandoc/core:3.4
         with:
@@ -79,11 +79,14 @@ jobs:
       - name: Setup github pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: copy content from output to sphinx-content folder
+        run: |
+          cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
       - name: Render the documentation with the transformed rst files
         run: >
           sphinx-build
           -c ./sphinx-config
-          -b html ./output ./public
+          -b html ./sphinx-content ./public
           # -vv
           # --jobs=auto
           # --show-traceback
