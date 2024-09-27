@@ -52,13 +52,13 @@ jobs:
             --list-tables=true
             --columns=100
             --extract-media ./output
-            --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
+            --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rstt
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: Replace values in rst files
         run: |
           sed --version
-          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
-          sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed2.rst
+          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rstt > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rstt
+          sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rstt > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed2.rst
       - name: run pandoc II
         uses: docker://pandoc/core:3.4
         with:
@@ -66,7 +66,7 @@ jobs:
             --standalone
             --list-tables=true
             --columns=100
-            --output=./output/Automotive-SPICE-PAM-v40.pdf.docx.rst
+            --output=./output/Automotive-SPICE-PAM-v40.pdf.docx.rstt
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.docx
       - name: Archive output folder
         uses: actions/upload-artifact@v4
