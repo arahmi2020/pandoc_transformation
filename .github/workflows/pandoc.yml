@@ -57,7 +57,8 @@ jobs:
       - name: Replace values in rst files
         run: |
           sed --version
-          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" -E "s/(^ +- )([^ ])/\0 \1/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
+          echo "James Bond" | sed -E 's/(.*) (.*)/The name is \2, \1 \2./'
+          sed -e "/^ *:header-rows: 1$/d" -e "s/ +$//g" -e "s/^( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
       - name: run pandoc II
         uses: docker://pandoc/core:3.4
         with:
