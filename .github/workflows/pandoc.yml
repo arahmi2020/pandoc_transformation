@@ -84,9 +84,9 @@ jobs:
           sphinx-build
           -c ./sphinx-config
           -b html ./output ./public
-          -vv
-          --jobs=auto
-          --show-traceback
+          # -vv
+          # --jobs=auto
+          # --show-traceback
           --keep-going
           # --fail-on-warning
       - name: Upload artifact to github pages
