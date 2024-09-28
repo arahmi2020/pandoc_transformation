@@ -47,9 +47,10 @@ jobs:
       - name: run pandoc I
         uses: docker://pandoc/core:3.4
         with:
-          args: >- # allows you to break string into multiple lines # --list-tables=true
+          args: >- # allows you to break string into multiple lines
             --standalone
             --columns=100
+            --list-tables=true
             --extract-media ./output
             --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
