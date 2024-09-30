@@ -42,9 +42,9 @@ jobs:
           repository: jgm/pandoc #/nightly/latest
           run-id: 11101799587
           #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
-      - name: Display structure of downloaded files
+      - name: Display structure of downloaded files and set permissions
         run: |
-          cp ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
+          mv ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
           chmod 744 ./pandoc/pandoc
           ls -lR
       - name: transform pdf to docx / odt
@@ -57,7 +57,15 @@ jobs:
           path: |
             ./intermediate/
         # Use always() to always run this step to publish test results when there are test failures
-        if: ${{ always() }}
+      - name: run pandoc nightly
+        run: >
+          ./pandoc/pandoc
+          --standalone
+          --columns=100
+          --list-tables=true
+          --extract-media ./output
+          --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.nightly.rst
+          ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run pandoc I
         uses: docker://pandoc/core:3.4
         with:
