@@ -40,9 +40,9 @@ List 2:
       Block 2.3 with Text line 2
 -  \ 
 
-      Block 2.3 with Text line 1
+      Block 2.4 with Text line 1
 
-      Block 2.3 with Text line 2
+      Block 2.4 with Text line 2
 
 List 3:
 
