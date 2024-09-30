@@ -33,7 +33,8 @@ jobs:
           python -m pip install -r ./pdf_to_odt_docx/requirements.txt
           python -m pip install -r ./sphinx-config/requirements.txt
           # python -m pip install . # install local script
-      - uses: actions/download-artifact@v4
+      - name: copy pandoc nigthly
+        uses: actions/download-artifact@v4
         with:
           name: nightly-linux # Name of the artifact to download.
           path: ./pandoc # Destination path.
@@ -43,9 +44,10 @@ jobs:
           #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
       - name: Display structure of downloaded files
         run: |
+          cp ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
           cd ./pandoc
-          ls -R
-          cd ..    
+          ls -lR
+          cd ..
       - name: transform pdf to docx / odt
         run: |
           python3 ./pdf_to_odt_docx/converter.py -in ./input -out ./intermediate
