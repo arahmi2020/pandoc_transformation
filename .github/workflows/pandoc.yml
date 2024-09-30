@@ -114,6 +114,12 @@ jobs:
           cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
           mkdir -p ./sphinx-content/output/media
           cp -r ./output/media ./sphinx-content/output/media
+      - name: Archive sphinx-content folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: sphinx-content
+          path: |
+            ./sphinx-content/
       - name: Render the documentation with the transformed rst files
         run: >
           sphinx-build
