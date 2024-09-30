@@ -111,7 +111,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: copy content from output to sphinx-content folder
         run: |
-          cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
+          # cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
+          cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.nightly.rst ./sphinx-content/ASPICE.rst
           mkdir -p ./sphinx-content/output
           cp -r ./output/media ./sphinx-content/output
       - name: Archive sphinx-content folder
