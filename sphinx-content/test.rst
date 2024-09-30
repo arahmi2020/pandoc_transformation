@@ -2,6 +2,27 @@
 Test of rst Syntax
 ##################
 
+With an empty comment
+---------------------
+
+List:
+
+-  .. 
+
+      Quoted Block 1
+
+         Quoted Block 2
+
+Table:
+
+.. list-table::
+
+   * - ..
+
+          Quoted Block 1
+
+             Quoted Block 2
+
 Syntax which works fine
 -----------------------
 
