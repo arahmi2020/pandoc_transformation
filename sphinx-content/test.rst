@@ -2,6 +2,34 @@
 Test of rst Syntax
 ##################
 
+Syntax which works fine
+-----------------------
+
+Text:
+
+   Quoted Block 1
+
+      Quoted Block 2
+
+List:
+
+-  \ 
+
+      Block 2.4 with Text line 1
+
+      Block 2.4 with Text line 2
+
+Table:
+
+.. list-table::
+
+   * - \ 
+
+          Block 2.4 with Text line 1
+
+          Block 2.4 with Text line 2
+
+
 Quoted Block
 ------------
 
@@ -54,7 +82,7 @@ List 3:
 List table with Block Quote
 ---------------------------
 
-The list:
+Table 1:
 
 .. list-table::
 
@@ -65,7 +93,7 @@ The list:
         |   Block 1.2 with Text line 2
 
 
-List 2:
+Table 2:
 
 .. list-table::
 
@@ -87,7 +115,7 @@ List 2:
 
           Block 2.4 with Text line 2
 
-List 3:
+Table 3:
 
 .. list-table::
 
