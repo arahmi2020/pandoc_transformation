@@ -38,8 +38,8 @@ jobs:
           name: nightly-linux # Name of the artifact to download.
           path: ./pandoc/ # Name of the artifact to download.
           github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
-          repository: jgm/pandoc/nightly/latest
-          #run-id: 11101799587
+          repository: jgm/pandoc #/nightly/latest
+          run-id: 11101799587
           #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
       - name: Display structure of downloaded files
         run: |
