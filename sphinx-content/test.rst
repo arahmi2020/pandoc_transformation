@@ -15,9 +15,9 @@ List:
 
 -  \ 
 
-      Block 2.4 with Text line 1
+      Quoted Block 1
 
-      Block 2.4 with Text line 2
+         Quoted Block 2
 
 Table:
 
@@ -25,9 +25,9 @@ Table:
 
    * - \ 
 
-          Block 2.4 with Text line 1
+          Quoted Block 1
 
-          Block 2.4 with Text line 2
+             Quoted Block 2
 
 
 Quoted Block
