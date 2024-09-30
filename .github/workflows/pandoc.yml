@@ -112,6 +112,7 @@ jobs:
       - name: copy content from output to sphinx-content folder
         run: |
           cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
+          mkdir -p ./sphinx-content/output/media
           cp -r ./output/media ./sphinx-content/output/media
       - name: Render the documentation with the transformed rst files
         run: >
