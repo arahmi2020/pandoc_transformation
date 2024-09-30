@@ -45,10 +45,8 @@ jobs:
       - name: Display structure of downloaded files
         run: |
           cp ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
-          cd ./pandoc
-          chmod 744 pandoc
+          chmod 744 ./pandoc/pandoc
           ls -lR
-          cd ..
       - name: transform pdf to docx / odt
         run: |
           python3 ./pdf_to_odt_docx/converter.py -in ./input -out ./intermediate
