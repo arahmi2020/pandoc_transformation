@@ -46,6 +46,7 @@ jobs:
         run: |
           cp ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
           cd ./pandoc
+          chmod 744 pandoc
           ls -lR
           cd ..
       - name: transform pdf to docx / odt
