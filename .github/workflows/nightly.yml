@@ -49,7 +49,7 @@ jobs:
           ls -lR
       - name: print pandoc version for debugging
         run: |
-          ./pandoc/pandoc
+          ./pandoc/pandoc --version
       - name: run pandoc nightly
         run: >
           ./pandoc/pandoc
