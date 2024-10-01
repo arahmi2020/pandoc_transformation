@@ -40,7 +40,7 @@ jobs:
           path: ./pandoc # Destination path.
           github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
           repository: jgm/pandoc #/nightly/latest
-          run-id: 11101799587
+          run-id: 11121029510
           #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
       - name: Display structure of downloaded files and set permissions
         run: |
