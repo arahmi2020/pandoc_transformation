@@ -59,6 +59,13 @@ jobs:
           --extract-media ./output
           --output=./output/Automotive-SPICE-PAM-v40.nightly.rst
           ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
+      - name: run pandoc nightly native
+        run: >
+          ./pandoc/pandoc
+          --standalone
+          --write=native
+          --output=./output/Automotive-SPICE-PAM-v40.nightly.native
+          ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
