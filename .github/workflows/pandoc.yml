@@ -44,7 +44,7 @@ jobs:
           #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
       - name: Display structure of downloaded files and set permissions
         run: |
-          mv ./pandoc/pandoc-nightly-linux-2024-09-30/pandoc ./pandoc/pandoc  
+          mv ./pandoc/pandoc-nightly-linux-2024-10-01/pandoc ./pandoc/pandoc  
           chmod 744 ./pandoc/pandoc
           ls -lR
       - name: transform pdf to docx / odt
