@@ -69,7 +69,7 @@ jobs:
       - name: run sed
         run: |
           sed --version
-          sed -E -e "'/4.\d{1,2}.\d. (?<id>\D{3}.\d) (?<title>.*)/a2 .. need:: \title :id: \id'/g" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
+          sed -E -e "/4.\d{1,2}.\d. (\D{3}.\d) (.*)/a2 .. need:: \2 :id: \1/g" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
