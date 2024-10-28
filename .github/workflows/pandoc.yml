@@ -25,7 +25,11 @@ jobs:
           python-version: "3"
           cache: 'pip' # caching pip dependencies
       - name: print versions for debugging
-        run: python --version ; pip --version ; whoami
+        run: |
+          whoami
+          python --version
+          pip --version
+          sed --version
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -33,20 +37,6 @@ jobs:
           python -m pip install -r ./pdf_to_odt_docx/requirements.txt
           python -m pip install -r ./sphinx-config/requirements.txt
           # python -m pip install . # install local script
-      - name: copy pandoc nigthly
-        uses: actions/download-artifact@v4
-        with:
-          name: nightly-linux # Name of the artifact to download.
-          path: ./pandoc # Destination path.
-          github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
-          repository: jgm/pandoc #/nightly/latest
-          run-id: 11121029510
-          #https://github.com/jgm/pandoc/actions/workflows/nightly.yml
-      - name: Display structure of downloaded files and set permissions
-        run: |
-          mv ./pandoc/pandoc-nightly-linux-2024-10-01/pandoc ./pandoc/pandoc  
-          chmod 744 ./pandoc/pandoc
-          ls -lR
       - name: transform pdf to docx / odt
         run: |
           python3 ./pdf_to_odt_docx/converter.py -in ./input -out ./intermediate
@@ -57,47 +47,24 @@ jobs:
           path: |
             ./intermediate/
         # Use always() to always run this step to publish test results when there are test failures
-      - name: run pandoc nightly
-        run: >
-          ./pandoc/pandoc
-          --standalone
-          --columns=100
-          --list-tables=true
-          --extract-media ./output
-          --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.nightly.rst
-          ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
-      - name: run pandoc I
-        uses: docker://pandoc/core:3.4
+      - name: run pandoc
+        uses: docker://pandoc/core:3.5
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
             --columns=100
             --list-tables=true
             --extract-media ./output
-            --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst
+            --output=./output/Automotive-SPICE-PAM-v40.rst
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
-      - name: run pandoc I with native output
-        uses: docker://pandoc/core:3.4
+      - name: run pandoc native
+        uses: docker://pandoc/core:3.5
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
             --write=native
-            --output=./output/Automotive-SPICE-PAM-v40.pdf.word.docx.native
+            --output=./output/Automotive-SPICE-PAM-v40.native
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
-      - name: Replace values in rst files
-        run: |
-          sed --version
-          sed -e "/^ *:header-rows: 1$/d" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.sed.rst
-          sed -E -e "s/( +- )([^ ])/\1 \2/g" ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst > ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst
-      - name: run pandoc II
-        uses: docker://pandoc/core:3.4
-        with:
-          args: >- # allows you to break string into multiple lines
-            --standalone
-            --list-tables=true
-            --columns=100
-            --output=./output/Automotive-SPICE-PAM-v40.pdf.docx.rst
-            ./intermediate/Automotive-SPICE-PAM-v40.pdf.docx
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
@@ -111,8 +78,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: copy content from output to sphinx-content folder
         run: |
-          # cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.rst.final_sed.rst ./sphinx-content/ASPICE.rst
-          cp ./output/Automotive-SPICE-PAM-v40.pdf.word.docx.nightly.rst ./sphinx-content/ASPICE.rst
+          cp ./output/Automotive-SPICE-PAM-v40.rst ./sphinx-content/ASPICE.rst
           mkdir -p ./sphinx-content/output
           cp -r ./output/media ./sphinx-content/output
       - name: Archive sphinx-content folder
