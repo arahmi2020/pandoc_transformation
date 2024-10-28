@@ -69,7 +69,7 @@ jobs:
       - name: run sed
         run: |
           sed --version
-          sed --regexp-extended -e "/4.\[0-9]{1,2}.[0-9]. ([A-Za-z]{3}.[0-9]) (.*)/a .. need:: \2 :id: \1/g" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
+          sed --regexp-extended -e "/^4\.[0-9]{1,2}\.[0-9]\. ([A-Za-z]{3}.[0-9]) (.*)/a .. need:: \2 :id: \1/g" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
