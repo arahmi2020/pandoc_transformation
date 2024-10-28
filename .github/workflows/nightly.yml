@@ -25,7 +25,11 @@ jobs:
           python-version: "3"
           cache: 'pip' # caching pip dependencies
       - name: print versions for debugging
-        run: python --version ; pip --version ; whoami
+        run: |
+          whoami
+          python --version
+          pip --version
+          sed --version
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -67,9 +71,8 @@ jobs:
           --output=./output/Automotive-SPICE-PAM-v40.nightly.native
           ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run sed
-        run: |
-          sed --version
-          sed --regexp-extended -e "/^4\.[0-9]{1,2}\.[0-9]\. ([A-Za-z]{3}.[0-9]) (.*)/a .. need:: \2 :id: \1/g" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
+        run:
+          sed --regexp-extended -e "/^4\.[0-9]{1,2}\.[0-9]\. ([A-Za-z]{3}.[0-9]) (.*)/2a .. need\:\: \2 \:id\: \1" ./output/Automotive-SPICE-PAM-v40.nightly.rst > ./output/Automotive-SPICE-PAM-v40.nightly.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
