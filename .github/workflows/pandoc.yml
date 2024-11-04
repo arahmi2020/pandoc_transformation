@@ -67,7 +67,7 @@ jobs:
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run sed
         run: #--regexp-extended 
-          sed --debug -e "/^4/ {{ a \n.. need 2\n   id 1; p; }}" ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
+          sed --debug -e "/^4/ { a \n.. need 2\n   id 1; }" ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
         with:
