@@ -67,7 +67,7 @@ jobs:
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run sed 2
         run:
-          seq 5 | sed '$!N;s/\(2\)\n\(3\)/\0\n\1/;P;D'
+          seq 5 | sed '$!N;s/^\(2\)\n\(.*\)/\0\n\1/;P;D'
       - name: run sed
         run: #--regexp-extended
           sed -e '/^4\.[0-9]\{1,2\}\.[0-9]\. \([A-Za-z]\{3\}.[0-9]\) \(.*\)$/i before' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
