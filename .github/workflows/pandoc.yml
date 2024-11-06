@@ -70,7 +70,8 @@ jobs:
           seq 8 | sed '$!N;s/^\(2\)\n.\+$/\0\na\1/;P;D'
       - name: run sed
         run: #--regexp-extended
-          sed -e '/^4\.[0-9]\{1,2\}\.[0-9]\. \([A-Za-z]\{3\}.[0-9]\) \(.*\)$/i before' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
+          sed -e '$!N;s/^\(4\.[0-9]\{1,2\}\.[0-9]\.\) \(.*\)\n.\+$/\0\n\n.. need \2\n   id \1/;P;D' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
+          #sed -e '/^4\.[0-9]\{1,2\}\.[0-9]\. \([A-Za-z]\{3\}.[0-9]\) \(.*\)$/i before' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
           #sed --regexp-extended -e '/^4\.[0-9]{1,2}\.[0-9]\. ([A-Za-z]{3}.[0-9]) (.*)/{{a .. need \2\n   id \1; i before}}' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
