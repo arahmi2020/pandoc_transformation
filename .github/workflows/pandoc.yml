@@ -67,7 +67,7 @@ jobs:
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
       - name: run sed
         run: #--regexp-extended
-          sed -e '/^4\.[0-9]\{1,2\}\.[0-9]\. \([A-Za-z]\{3\}.[0-9]\) (.*)/{a .. need \2\n   id \1; i before}' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
+          sed -e '/^4\.[0-9]\{1,2\}\.[0-9]\. \([A-Za-z]\{3\}.[0-9]\) (.*)/{a .. need; i before}' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
           #sed --regexp-extended -e '/^4\.[0-9]{1,2}\.[0-9]\. ([A-Za-z]{3}.[0-9]) (.*)/{{a .. need \2\n   id \1; i before}}' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
       - name: Archive output folder
         uses: actions/upload-artifact@v4
