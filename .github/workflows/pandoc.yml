@@ -72,23 +72,27 @@ jobs:
         run: |
           sed -e '$!N;/^[4]/{s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. \(.*\)\n.\+$/\0\n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3/;p;d};P;D;' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
         # Here we have sed with a N;P;D; pattern see: https://unix.stackexchange.com/questions/216544/how-to-print-a-line-if-that-line-or-the-next-line-do-not-contain-a-particular-st/216550#216550
-        # Pattern: $!N;<you replacements>;P;D;
-        # In the P section, we check if we have a chapter: /^[4]/ = check if the line starts with 4:
+        #    Generic pattern:  '$!N;{<your logic>};P;D;'
+        #    Specific Pattern: '$!N;/<your checks>/{s/<your extracts>/<your replacements>/;p;d;};P;D;'
+        # In the replacement section, we check if we have a chapter:
+        #    '/^[4]/' = check if the line starts with 4
         #    If this is the case: we extract the chapter information and only parse these, where we are 3 level deep.
-        #          s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. = first - thired extract groups
+        #          's/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.' = first till third extract groups
         #       Additionally we extract the healine of the chapter: 
-        #          \(.*\) = fourth extract group
+        #          '\(.*\)' = fourth extract group
         #       And take the next line with us:
-        #          \n.\+$
+        #          '\n.\+$
         #     We replace what we extracted with:
         #        all information:
-        #            \0
-        #        and add afterwords a new line, a need object line and a id line
-        #           \n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3
-        #     We close the replacment with:
-        #        /
-        #     After the replacment we write everything in the pattern sapce to the output and clear it. 
-        #        p;d;
+        #            '\0\n'
+        #        and add afterwords a empty line, a need object line and a id line
+        #           '\n' = empty line
+        #           '.. need:: \4\n' = defintion of a need with fourth extract group (headline)
+        #           '   :id: ASPICE40_\1_\2_\3' = name and first till third extract groups (chapter numbers)
+        #     We close the replacment section with:
+        #        '/'
+        #     After the replacment section, we write everything in the pattern space to the output and clear it. 
+        #        'p;d;'
 
       - name: Archive output folder
         uses: actions/upload-artifact@v4
