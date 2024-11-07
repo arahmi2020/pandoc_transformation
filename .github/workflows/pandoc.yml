@@ -71,7 +71,9 @@ jobs:
       - name: run sed
         run: |
           sed -e '$!N;/^[4]/{s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. \(.*\)\n.\+$/\0\n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3\n/;p;d;};P;D;' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
-        # Here we have sed with a N;P;D; pattern see: https://unix.stackexchange.com/questions/216544/how-to-print-a-line-if-that-line-or-the-next-line-do-not-contain-a-particular-st/216550#216550
+        # Here we have sed with a N;P;D; pattern
+        # see: https://unix.stackexchange.com/questions/216544/how-to-print-a-line-if-that-line-or-the-next-line-do-not-contain-a-particular-st/216550#216550
+        # or:  https://unix.stackexchange.com/questions/285160/how-to-edit-next-line-after-pattern-using-sed#comment496751_285162
         #    Generic pattern:  '$!N;{<your logic>};P;D;'
         #    Specific Pattern: '$!N;/<your checks>/{s/<your extracts>/<your replacements>/;p;d;};P;D;'
         # In the replacement section, we check if we have a chapter:
