@@ -65,12 +65,13 @@ jobs:
             --write=native
             --output=./output/Automotive-SPICE-PAM-v40.native
             ./intermediate/Automotive-SPICE-PAM-v40.pdf.word.docx
-      - name: run sed 2
-        run:
-          seq 8 | sed '$!N;s/^\(2\)\n.\+$/\0\na\1/;P;D'
+      - name: run test sed
+        run: |
+          seq 15 | sed '$!N;/^[2,7,9]/{s/^\([0-9]\{1,2\}\)\n.\+$/\0\n.. need:: \1\n   :id: \1\n/;p;d;};P;D'
+        # '$!N;/^[4]/{s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. \(.*\)\n.\+$/\0\n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3/;p;d};P;D;'
       - name: run sed
         run: |
-          sed -e '$!N;/^[4]/{s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. \(.*\)\n.\+$/\0\n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3/;p;d};P;D;' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
+          sed -e '$!N;/^[4]/{s/^\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\.\([0-9]\{1,2\}\)\. \(.*\)\n.\+$/\0\n\n.. need:: \4\n   :id: ASPICE40_\1_\2_\3/;p;d;};P;D;' ./output/Automotive-SPICE-PAM-v40.rst > ./output/Automotive-SPICE-PAM-v40.rst.sed
         # Here we have sed with a N;P;D; pattern see: https://unix.stackexchange.com/questions/216544/how-to-print-a-line-if-that-line-or-the-next-line-do-not-contain-a-particular-st/216550#216550
         #    Generic pattern:  '$!N;{<your logic>};P;D;'
         #    Specific Pattern: '$!N;/<your checks>/{s/<your extracts>/<your replacements>/;p;d;};P;D;'
